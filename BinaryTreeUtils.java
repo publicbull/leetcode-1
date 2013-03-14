@@ -42,7 +42,7 @@ public class BinaryTreeUtils {
     if(root==null) return;
     curLevel.add(root);
     int curNum=1,nextNum=0;
-    
+
     while(!curLevel.isEmpty()) {
       TreeNode n = curLevel.remove();
       if(n!=null) {
@@ -65,7 +65,7 @@ public class BinaryTreeUtils {
     Queue<TreeNode> curLevel = new LinkedList<TreeNode>(),  nextLevel = new LinkedList<TreeNode>();
     if(root==null) return;
     curLevel.add(root);
-    
+
     while(!curLevel.isEmpty()) {
       TreeNode n = curLevel.remove();
       if(n!=null) {
@@ -80,7 +80,7 @@ public class BinaryTreeUtils {
         nextLevel=t;
       }
     } 
-    
+
   }
   void print_by_level(Queue<TreeNode> q) {
     while(!q.isEmpty()) {
@@ -93,7 +93,7 @@ public class BinaryTreeUtils {
     } 
   }
 
-  TreeNode buildTreeFromFile(StringReader br) {
+  TreeNode buildTreeFromFileold(StringReader br) {
     try {
       int i;
       while((i=br.read())!=-1) {
@@ -101,11 +101,53 @@ public class BinaryTreeUtils {
         //System.out.println(i+" "+c);
         if(c=='#') return null;
         else {
-          TreeNode ltree = buildTreeFromFile(br);
-          TreeNode rtree = buildTreeFromFile(br);
+          TreeNode ltree = buildTreeFromFileold(br);
+          TreeNode rtree = buildTreeFromFileold(br);
           TreeNode root = new TreeNode(c-48);
           root.left=ltree;
           root.right=rtree;
+          if(ltree!=null)
+            ltree.parent=root;
+          if(rtree!=null)
+            rtree.parent=root;
+          return root;
+        }
+      }
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    } 
+    return null;
+  }
+
+  public static boolean isInteger(String s) {
+    try { 
+      Integer.parseInt(s); 
+    } catch(NumberFormatException e) { 
+      return false; 
+    }
+    return true;
+  }
+
+  TreeNode buildTreeFromFile(Scanner scanner) {
+    try {
+      int i;
+      while(scanner.hasNext()) {
+        String s= scanner.next();
+        if(!isInteger(s)) return null;
+          //System.out.println(s);
+        //char c = (char)i;
+        //System.out.println(i+" "+c);
+        //if(c=='#') return null;
+        else {
+          TreeNode ltree = buildTreeFromFile(scanner);
+          TreeNode rtree = buildTreeFromFile(scanner);
+          TreeNode root = new TreeNode(Integer.parseInt(s));
+          root.left=ltree;
+          root.right=rtree;
+          if(ltree!=null)
+            ltree.parent=root;
+          if(rtree!=null)
+            rtree.parent=root;
           return root;
         }
       }
@@ -135,31 +177,25 @@ public class BinaryTreeUtils {
 
   }
 
-/*
-  count nodes in a complete bt
-*/
-int countNodes(TreeNode root) {
-    if ( root == null )
-        return 0;
-    if ( root.left == null )
-        return 1;
-    TreeNode ptr=root;
-    int height=0;
-    while ( ptr!=null ) {
-        ++height;
-        ptr = ptr.left;
+  ArrayList<TreeNode> readTreesFromFile(String fn) {
+    ArrayList<TreeNode> result = new ArrayList<TreeNode>();
+    try {
+      FileReader fr = new FileReader(fn);
+      BufferedReader br = new BufferedReader(fr);
+      String s = null;
+      while((s=br.readLine())!=null) {
+        //StringReader sr = new StringReader(s);
+        Scanner scanner = new Scanner(s);
+        System.out.println("input:"+s);
+        TreeNode h = buildTreeFromFile(scanner);
+        result.add(h);
+      }
+    } catch (IOException ex) {
+      ex.printStackTrace();
     }
-    ptr = root.left;
-    int hTemp=0;
-    while ( ptr!=null ) {
-        ++hTemp;
-        ptr = ptr.right;
-    }
-    if ( hTemp == height-1 )
-        return ( 1 << hTemp ) + countNodes(root.right);
-    else
-        return ( 1 << hTemp ) + countNodes(root.left);    
-}
+    return result;
+  }
+
   /*
      1
      2   3
@@ -175,13 +211,13 @@ in: 4 2 5 1 3
       BufferedReader br = new BufferedReader(fr);
       String s = null;
       while((s=br.readLine())!=null) {
-        StringReader sr = new StringReader(s);
+        Scanner sr = new Scanner(s);
         System.out.println("input:"+s);
         TreeNode h = buildTreeFromFile(sr);
         /* print by level */
         System.out.println("by level");
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        q.add(h);
+        //Queue<TreeNode> q = new LinkedList<TreeNode>();
+        //q.add(h);
         print_by_level_newline_oneq(h);
         System.out.println();
 
@@ -202,9 +238,6 @@ in: 4 2 5 1 3
 
         boolean valid=isValidBST(h);
         System.out.println(valid);
-
-        int cnt = countNodes(h); 
-        System.out.println("#nodes:"+cnt);
       }
       br.close();
 

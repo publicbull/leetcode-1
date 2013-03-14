@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+/*
+Find numbers in an array that appear only once
+
+http://www.mitbbs.com/article_t/JobHunting/32096259.html
+*/
+
 public class FindUniqueElementInArray {
   class NumberFlags
   {

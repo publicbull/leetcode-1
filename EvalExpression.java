@@ -30,8 +30,7 @@ public class EvalExpression {
     } else if(tokens.get(i+1).equals("-")) {
       r=Double.parseDouble(tokens.get(i)); 
       return r+eval(tokens,i+2, true);
-    } else return 1.0;
-    
+    } else return 1.0; 
   }
   void foo(String s) {
     String[] tokens = s.split("(?<=[-+*/])|(?=[-+*/])");

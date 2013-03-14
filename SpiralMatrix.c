@@ -1,17 +1,17 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"../ylutil.h"
+#include"ylutil.h"
 
 void printlayer(int**a,int m, int n, int k) {
   int i,j;
   for(i=k;i<n-k;i++) 
     printf("%d\t", a[k][i]);
-  for(i=k+1;i<n-k;i++) 
+  for(i=k+1;i<m-k-1;i++) 
     printf("%d\t", a[i][n-1-k]);
-  for(i=n-k-2;i>=k;i--) 
-    printf("%d\t", a[n-1-k][i]);
-  for(i=n-k-2;i>=k+1;i--) 
+  for(i=n-k-1;i>=k;i--) 
+    printf("%d\t", a[m-1-k][i]);
+  for(i=m-k-2;i>=k+1;i--) 
     printf("%d\t", a[i][k]);
 } 
 
@@ -40,28 +40,47 @@ void fillmatrix(int** a, int n) {
   }
 }
 
-int main(int argc, char* argv[]) {
-  int n=4,i,j,c=1;
-  if(argc>1) n=atoi(argv[1]);
+void testFill(int n) {
   int **a = createIntMatrix(n,n);
-  for(i=0;i<n;i++) { 
+  fillmatrix(a,n);
+  print_matrix(a,n,n);
+}
+
+void testPrint(int n) {
+  int i,j,c=1;
+  int m=3;
+  int **a = createIntMatrix(m,n);
+  int min = (m < n ? m : n);  
+  int layer = min / 2+1;  
+
+  for(i=0;i<m;i++) { 
     for(j=0;j<n;j++) {
-      //a[i][j]=c++;
-      //a[i][j]=-1;
+      a[i][j]=c++;
     }
   }
 
-  print_matrix(a,n,n);
+  print_matrix(a,m,n);
 
   int k;
-  fillmatrix(a,n);
-  for(k=0;k<n/2;k++) {
+  for(k=0;k<layer/2;k++) {
+    printlayer(a,m,n,k);
   }
-  if(n%2) {
-    printf("%d\t",a[n/2][n/2]);
+  if(m%2) {
+    if(m>n){
+      for (i = layer-1; i <= m-1-layer; ++i)  
+        printf("%d ",a[i][n/2]);  
+    } else {
+      for (i = layer-1; i <= n-1-layer; ++i)  
+        printf("%d ",a[m/2][i]);  
+    }
   }
-  print_matrix(a,n,n);
   printf("\n");
   destroyIntArray(a);
+}
+
+int main(int argc, char* argv[]) {
+  int n=4;
+  if(argc>1) n=atoi(argv[1]);
+  testPrint(n);
   return 1;
 }

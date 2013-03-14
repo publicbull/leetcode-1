@@ -11,7 +11,7 @@ double readNumber2(const char * str) {
   for (++str; isdigit(*str) || *str == '.'; ++str)
     ;
 
-  //printf("%f\n", num);
+  printf("%f\n", num);
 
   return num;
 }
@@ -30,6 +30,8 @@ double readNumber(const char * *str) {
 double calculate(const char * str) {
   if (*str == '\0')  return 0.0;
 
+  printf("str=%s\n", str);
+
   double result = 1.0;
   char op = '*';
   while (op == '*' || op == '/') {
@@ -39,6 +41,7 @@ double calculate(const char * str) {
       result /= readNumber(&str);
 
     op = *str++;
+    printf("%c\n", op);
   }
 
   return result + calculate(--str);

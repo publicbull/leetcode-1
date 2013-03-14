@@ -6,6 +6,7 @@
 /*
 2 eggs: F(i)=MIN{MAX{F(i-j)+1,j}} 1<=j<=i
 n eggs, k floors: W(n,k) = 1 + min{max(W(n − 1, x − 1), W(n,k − x)): x in {1, 2, ..., k}}, n = 2, ..., N; k = 2, 3, 4, ..., H
+see ref: http://en.wikipedia.org/wiki/Dynamic_programming#Egg_dropping_puzzle
 */
 int foo(int n) {
   int dp[n+1];

@@ -1,3 +1,5 @@
+#include<limits.h>
+#include<string.h>
 #define MAX(X,Y) (X)>(Y)?(X):(Y)
 #define MIN(X,Y) (X)<(Y)?(X):(Y)
 
@@ -67,12 +69,12 @@ void print_matrix(int** a, int len_x,int len_y) {
   }
 }
 int** createIntMatrix(int m, int n) {
-  int* values = calloc(m*n, sizeof(int));
-  int** rows = malloc(n*sizeof(int*));
+  int* values = (int*)calloc(m*n, sizeof(int));
+  int** rows = (int**)malloc(m*sizeof(int*));
   int i;
-  for (i=0; i<n; ++i)
+  for (i=0; i<m; ++i)
   {
-    rows[i] = values + i*m;
+    rows[i] = values + i*n;
   }
   return rows;
 }
