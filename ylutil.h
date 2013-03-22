@@ -35,10 +35,10 @@ int int_min3(int x,int y,int z) {
   return MIN(MIN(x,y),z);
 }
 
-void print_array_w_index(int* a, int len) {
+void print_array_w_index(int* a, int len,int printbase) {
   int i;
   for(i=0;i<len;i++) {
-    printf("a[%d]:%d\t", i, a[i]);
+    printf("a[%d]:%d\t", i+printbase, a[i]);
   }
   printf("\n");
 }
