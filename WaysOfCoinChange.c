@@ -86,8 +86,8 @@ int main() {
   int sum=5;
   int a[]={1,2};
   int n=2;
-  //int w = ways_rc(a,n,sum);
-  int w = ways_dp2(a,n,sum);
+  int w = ways_rc(a,n,sum);
+  //int w = ways_dp2(a,n,sum);
   printf("%d\n", w);
   return 1;
 }
