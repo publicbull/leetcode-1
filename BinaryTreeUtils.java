@@ -128,6 +128,13 @@ public class BinaryTreeUtils {
     return true;
   }
 
+  TreeNode buildTreeFromString(String s) {
+      Scanner scanner = new Scanner(s);
+      System.out.println("input:"+s);
+      TreeNode h = buildTreeFromFile(scanner);
+      return h;
+  }
+
   TreeNode buildTreeFromFile(Scanner scanner) {
     try {
       int i;
