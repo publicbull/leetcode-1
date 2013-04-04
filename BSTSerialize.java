@@ -20,8 +20,8 @@ public class BSTSerialize {
   }
 
   void serialize(TreeNode r, FileWriter fw) throws Exception {
-    if(r==null) {fw.write("#");return;}
-    fw.write(r.val+"");
+    if(r==null) {fw.write("# ");return;}
+    fw.write(r.val+" ");
     serialize(r.left, fw);
     serialize(r.right, fw); 
   }
@@ -49,6 +49,7 @@ public class BSTSerialize {
     }
   }
   public static void main(String[] argv) {
-    new BSTSerialize().testDeserialize("tmp.txt");
+    //new BSTSerialize().testDeserialize("tmp.txt");
+    new BSTSerialize().testSerialize();
   }
 }

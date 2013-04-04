@@ -3,6 +3,12 @@
 #define MAX(X,Y) (X)>(Y)?(X):(Y)
 #define MIN(X,Y) (X)<(Y)?(X):(Y)
 
+void swap_chars(char *a, int x,int y) {
+  printf("swaping %d %d\n", x,y);
+  char t=a[x];
+  a[x]=a[y];
+  a[y]=t;
+}
 void swap(int *a, int x,int y) {
   int t=a[x];
   a[x]=a[y];

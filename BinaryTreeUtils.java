@@ -49,7 +49,9 @@ public class BinaryTreeUtils {
         curLevel.add(n.left);
         curLevel.add(n.right);
         nextNum+=2;
-        System.out.print(n.val +" ");
+        int parentVal=-1;
+        if (n.parent!=null) parentVal=n.parent.val;
+        System.out.print(n.val +"("+parentVal+") ");
         curNum--;
       }
       if(curNum==0) {
@@ -71,7 +73,9 @@ public class BinaryTreeUtils {
       if(n!=null) {
         nextLevel.add(n.left);
         nextLevel.add(n.right);
-        System.out.print(n.val +" ");
+        int parentVal=-1;
+        if (n.parent!=null) parentVal=n.parent.val;
+        System.out.print(n.val +"("+parentVal+") ");
       }
       if(curLevel.isEmpty()) {
         System.out.println(); 
