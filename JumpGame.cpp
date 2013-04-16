@@ -6,6 +6,9 @@
 
 using namespace std;
 
+/*
+I dont have proof for this greedy method, altho it passes all the test cases
+*/
 
 class Solution {
   public:

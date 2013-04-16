@@ -1,4 +1,24 @@
 public class Solution {
+  /* dp version. n^2. can't finish large test cases */
+  public int jump_dp(int[] A) {
+    // Start typing your Java solution below
+    // DO NOT write main() function
+    //dp[i]=1+min{dp[i-a[j]]}
+    int n = A.length;
+    int[] dp = new int[n];
+    for(int i=1;i<n;i++)dp[i]=-1;
+    for(int i=1;i<n;i++) {
+      int min=10000;
+      for(int j=i-1;j>=0;j--) {
+        if(dp[j]>=0&&(A[j]+j)>=i&&min>dp[j]){min=dp[j];}
+      }
+      if(min==10000){}
+      else dp[i]=min+1;
+    }
+
+    return dp[n-1];
+
+  }
   public int jump2(int[] A) {
     // Start typing your Java solution below
     // DO NOT write main() function

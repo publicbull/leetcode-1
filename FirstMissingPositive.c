@@ -19,7 +19,8 @@ int firstMissingPositive(int* A,int n) {
   return n+1;   
 }
 int main(int argc, char* argv[]) {
-  int a[]={3,4,-1,1};
+  //int a[]={3,4,-1,1};
+  int a[]={1};
   int m = firstMissingPositive(a,4);
   printf("%d\n",m);
   return 1;

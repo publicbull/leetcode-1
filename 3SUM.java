@@ -5,11 +5,10 @@ public class Solution {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
         Arrays.sort(num);
         if(num.length<3) return result;
-        int target=0,prev=num[0]-1;
+        int target=0;
         for(int i=0;i<num.length-2;i++) {
             int j=i+1, k=num.length-1;
-            if(prev==num[i])continue;
-            prev=num[i];
+            if(i>0&&num[i]==num[i-1])continue;
             while(j<k) {
                 int diff=target-num[i]-num[j]-num[k];
                 if(diff<0) k--;
@@ -34,10 +33,10 @@ public class Solution {
         Arrays.sort(num);
         int diff=100000;
         int rc=0;
-        for(int i=0;i<num.length;i++) {
-            
+        for(int i=0;i<num.length;i++) { 
             for(int j=i+1,k=num.length-1;j<k;) {
                 int sum=num[i]+num[j]+num[k];
+                //or use abs
                 if(sum <target) {
                     j++;
                     if(diff>target-sum) {

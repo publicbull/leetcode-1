@@ -20,9 +20,9 @@ public class SubSetII {
   }
 
   public static void main(String[] args) {
-    int[] num = new int[]{1,1,2};
+    int[] num = new int[]{1,2};
     Arrays.sort(num);
-    ArrayList<ArrayList<Integer>> rc = new SubSetII().foo(num);
+    ArrayList<ArrayList<Integer>> rc = new SubSetII().subsetsWithDup(num);
     for(ArrayList<Integer> ar: rc) {
       for(Integer i: ar) {
         System.out.print(i+" ");

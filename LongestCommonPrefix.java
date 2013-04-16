@@ -23,4 +23,22 @@ L:while(true) {
   return r.toString();
 
   }
+  public String longestCommonPrefix(String[] strs) {
+    // Start typing your Java solution below
+    // DO NOT write main() function
+    int p=0;
+    int n  = strs.length;
+    if(n==0) return "";
+    int minlen=strs[0].length();
+    for(int i=0;i<n;i++) 
+      if(minlen>strs[i].length()) minlen=strs[i].length();
+    while(p<minlen) {
+      char c = strs[0].charAt(p);
+      for(int i=1;i<n;i++) 
+        if(strs[i].charAt(p)!=c) return strs[0].substring(0,p); 
+      ++p;
+    }
+    return strs[0].substring(0,p);
+
+  }
 }

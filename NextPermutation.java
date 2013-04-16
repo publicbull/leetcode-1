@@ -42,13 +42,14 @@ class NextPermutation {
 
   }
   public static void main(String[] args) {
-    int[] num = new int[]{1,2,3,4};
+    //int[] num = new int[]{1,2,3,4};
+    int[] num = new int[]{0,0,0,1,9};
     NextPermutation foo = new NextPermutation();
-    for(int i=0;i<10;i++) {
+    for(int i=0;i<100;i++) {
       foo.printArray(num);
       foo.nextPermutation(num);
-      foo.printArray(num);
-      System.out.println();
+      //foo.printArray(num);
+      //System.out.println();
     }
   }
 
