@@ -8,15 +8,11 @@
  * };
  */
 class Solution {
-  public:
-    int foo(TreeNode *n) {
-      if(n==NULL) return 0;
-      return max(foo(n->left)+1, foo(n->right)+1);
-    }
+public:
     int maxDepth(TreeNode *root) {
-      // Start typing your C/C++ solution below
-      // DO NOT write int main() function
-      return foo(root);
-
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        if(!root) return 0;
+        return max(maxDepth(root->left),maxDepth(root->right))+1;
     }
 };
