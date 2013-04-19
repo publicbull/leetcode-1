@@ -12,31 +12,29 @@ public class Solution {
     // Start typing your Java solution below
     // DO NOT write main() function
     ArrayList<ArrayList<Integer>>  r = new ArrayList<ArrayList<Integer>>();
+    if(root==null) return r;
 
     Queue<TreeNode> q = new LinkedList<TreeNode>();
     q.add(root);
     int thislevel=1,nextlevel=0;
     ArrayList<Integer> item = new ArrayList<Integer>();
-    if(root!=null) r.add(item);
 
     while(!q.isEmpty()) {
       TreeNode n = q.remove();
+      --thislevel;
 
-      if(n!=null) {
-        --thislevel;
-        item.add(n.val);
-        if(n.left!=null) {
-          q.add(n.left);++nextlevel;
-        }
-        if(n.right!=null) {
-          q.add(n.right);++nextlevel;
-        }
+      item.add(n.val);
+      if(n.left!=null) {
+        q.add(n.left);++nextlevel;
       }
-      if(thislevel==0&&!q.isEmpty()) {
+      if(n.right!=null) {
+        q.add(n.right);++nextlevel;
+      }
+      if(thislevel==0) {
         thislevel=nextlevel;
         nextlevel=0;
-        item = new ArrayList<Integer>();
         r.add(item);
+        item = new ArrayList<Integer>();
       }
 
     }
