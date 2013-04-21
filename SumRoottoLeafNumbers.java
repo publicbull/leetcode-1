@@ -1,52 +1,38 @@
-import java.io.*;
-import java.util.*;
-
-public class SumRoottoLeafNumbers {
-  BinaryTreeUtils btu = new BinaryTreeUtils();
-  Scanner scanner = null;
-  int sum=0;
-
-  void test() {
-    scanner = new Scanner("1 2 4 # # 5 # # 3 6 # # 7 # #");
-    TreeNode t1 = btu.buildTreeFromFile(scanner);
-    ArrayList<TreeNode> ls = new ArrayList<TreeNode>();
-    foo(t1,ls);
-  } 
-
-  void addToSum(ArrayList<TreeNode> ls) {
-    int rc=0;
-    for(TreeNode tn : ls) {
-      rc=rc*10+tn.val;
-    }    
-    sum+=rc;
-  }
-
-  void foo(TreeNode t, ArrayList<TreeNode> ls) {
-    if(t==null) return;
-    if(t.left==null && t.right==null) {
-      ls.add(t);
-      addToSum(ls);
-      ls.remove(ls.size()-1);
-      return;
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    int sum;
+    int getIntValue(ArrayList<Integer> path) {
+        int a=0;
+        for(int i=0;i<path.size();i++) 
+            a=a*10+path.get(i);
+        return a;
     }
-    else {
-      ls.add(t);
-      foo(t.left,ls);
-      foo(t.right,ls);
-      ls.remove(ls.size()-1);
-    }   
-  }
-
-  public int sumNumbers(TreeNode root) {
-    // Start typing your Java solution below
-    // DO NOT write main() function
-    ArrayList<TreeNode> ls = new ArrayList<TreeNode>();
-    sum=0;
-    foo(root,ls);
-    return sum;
-  }
-
-  public static void main(String[] args) {
-    new SumRoottoLeafNumbers().test();
-  }
+    void dfs(TreeNode n, ArrayList<Integer> path) {
+        if(n==null) return;
+        path.add(n.val);
+        if(n.left==null&&n.right==null) {
+            sum+=getIntValue(path);
+        } else {
+            dfs(n.left,path);
+            dfs(n.right,path);
+        }
+        path.remove(path.size()-1);
+    }
+    public int sumNumbers(TreeNode root) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(root==null) return 0;
+        sum=0;
+        ArrayList<Integer> path = new  ArrayList<Integer>();
+        dfs(root,path);
+        return sum;
+    }
 }
