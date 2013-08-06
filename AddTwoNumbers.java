@@ -10,56 +10,68 @@
  * }
  */
 public class Solution {
-    int getLen(ListNode n) {
-        int len=0;
-        while(n!=null) {
-            n=n.next;
-            len++;
+    int getlen(ListNode h) {
+        int l=0;
+        while(h!=null) {
+            l++;
+            h=h.next;
         }
-        return len;
+        return l;
     }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         // Start typing your Java solution below
         // DO NOT write main() function
-        ListNode big=l1,small=l2;
-        int lbig=getLen(l1);
-        int lsmall=getLen(l2);
-        if(lbig<lsmall) {
-            big=l2;
+        ListNode small, big;
+        if(getlen(l1)<getlen(l2)) {
             small=l1;
-            int t = lbig;
-            lbig=lsmall;
-            lsmall=t;
+            big=l2;
+        } else {
+            small=l2;
+            big=l1;
         }
-        int carry=0;
-        ListNode pb=big,ps=small;
-        ListNode h = null,p = null;
-        while(ps!=null) {
-            int s = ps.val+pb.val+carry;
-            if(s>9) {s-=10;carry=1;}
-            else carry=0;
-            pb.val=s;
-            if(h==null) h=pb;
-            if(p==null) p=pb;
-            else {p.next=pb;p=pb;}
-            pb=pb.next;
-            ps=ps.next;
+        int c=0;
+        ListNode h = null,p=null;
+        while(small!=null) {
+            int d3 = small.val+big.val+c;
+            if(d3>9) {
+                c=1;
+                d3-=10;
+            } else {
+                c=0;
+            }
+            ListNode n = new ListNode(d3);
+            if(h==null) {
+                h=n;
+                p=n;
+            } else {
+                p.next=n;
+                p=n;
+            }
+            small=small.next;
+            big=big.next;
         }
-        while(pb!=null) {
-            pb.val+=carry;
-            if(pb.val>9) {
-                carry=1;
-                pb.val-=10;
-            }else carry=0;
-            p.next=pb;
-            p=pb;
-            pb=pb.next;
+        while(big!=null) {
+            int d3 = big.val+c;
+            if(d3>9) {
+                c=1;
+                d3-=10;
+            } else {
+                c=0;
+            }
+            ListNode n = new ListNode(d3);
+            if(h==null) {
+                h=n;
+                p=n;
+            } else {
+                p.next=n;
+                p=n;
+            }
+            big=big.next;
         }
-        if(carry>0) {
-            ListNode n = new ListNode(carry);
+        if(c==1) {
+            ListNode n = new ListNode(1);
             p.next=n;
         }
         return h;
-        
     }
 }
