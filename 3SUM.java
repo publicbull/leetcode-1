@@ -31,7 +31,7 @@ public class Solution {
         // Start typing your Java solution below
         // DO NOT write main() function
         Arrays.sort(num);
-        int diff=100000;
+        int diff=Integer.MAX_VALUE;
         int rc=0;
         for(int i=0;i<num.length;i++) { 
             for(int j=i+1,k=num.length-1;j<k;) {
