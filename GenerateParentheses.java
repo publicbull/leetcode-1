@@ -24,4 +24,30 @@ public class Solution {
         return r;
         
     }
+
+    void foo(int l, int r, char[] cs,int depth, ArrayList<String> result) {
+        //l,r are available ( and )
+        if(l==0&&r==0) {
+            result.add(new String(cs));
+            return;
+        }
+        if(l>0) {
+                cs[depth]='(';
+                foo(l-1,r,cs,depth+1,result);
+        }
+        if(l<r) {
+            if(r>0) {
+                cs[depth]=')';
+                foo(l,r-1,cs,depth+1,result);
+            }
+        }
+    }
+    public ArrayList<String> generateParenthesis(int n) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        char[] cs = new char[2*n];
+        ArrayList<String> r = new ArrayList<String>();
+        foo(n,n,cs,0,r);
+        return r;
+    }
 }
